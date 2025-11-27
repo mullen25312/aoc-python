@@ -1,0 +1,7 @@
+numpy
+pytest
+pyyaml
+regex
+python-ranges
+dijkstra
+advent-of-code-data

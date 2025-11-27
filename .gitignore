@@ -1,3 +1,10 @@
+# Advent of Code
+y*/d*/demo.txt
+y*/d*/input.txt
+y*/d*/test_demo.yaml
+y*/d*/test_input.yaml
+.config/aocd
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
