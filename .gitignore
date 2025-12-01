@@ -5,6 +5,9 @@ y*/d*/test_demo.yaml
 y*/d*/test_input.yaml
 .config/aocd
 
+# VS Code settings
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
