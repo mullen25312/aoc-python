@@ -14,7 +14,7 @@ days_to_be_tested = []
 # days_to_be_tested.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y22"], range(1, 26))]) # year 2022
 # days_to_be_tested.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y23"], range(1, 26))]) # year 2023
 # days_to_be_tested.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y24"], range(1, 26))]) # year 2024
-days_to_be_tested.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 2))]) # year 2025
+days_to_be_tested.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 3))]) # year 2025
 # days_to_be_tested.remove("y24.d09")
 # days_to_be_tested = ["y24.d01"]
 
