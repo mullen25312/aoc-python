@@ -6,6 +6,8 @@ import importlib
 import itertools
 import aocd
 
+from timeit import default_timer as timer
+
 # construct list of selected daily puzzles
 dailyPuzzles = []
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y19"], range(1, 26))]) # year 2019
@@ -14,7 +16,7 @@ dailyPuzzles = []
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y22"], range(1, 26))]) # year 2022
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y23"], range(1, 26))]) # year 2023
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y24"], range(1, 26))]) # year 2024
-dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 26))]) # year 2025
+dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 4))]) # year 2025
 # dailyPuzzles.remove("y19.d07")
 # dailyPuzzles = ["y23.d17"]
 
@@ -43,8 +45,11 @@ if __name__ == "__main__":
 
         # solve puzzle
         puzzle.parse()
+        start = timer()
         puzzle.part_one()
+        dur_part_one = (timer() - start) * 1000
         puzzle.part_two()
+        dur_part_two = (timer() - (start + dur_part_one / 1000)) * 1000
 
         # print results
-        print(f"### {dailyPuzzle} ### : " + str(puzzle.part_one_result) + " / " + str(puzzle.part_two_result))
+        print(f"### {dailyPuzzle} ### : {puzzle.part_one_result:15d} / {puzzle.part_two_result:15d}  in {dur_part_one:8.2f} / {dur_part_two:8.2f} ms")
