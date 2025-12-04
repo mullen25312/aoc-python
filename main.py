@@ -16,7 +16,7 @@ dailyPuzzles = []
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y22"], range(1, 26))]) # year 2022
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y23"], range(1, 26))]) # year 2023
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y24"], range(1, 26))]) # year 2024
-dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 4))]) # year 2025
+dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 5))]) # year 2025
 # dailyPuzzles.remove("y19.d07")
 # dailyPuzzles = ["y23.d17"]
 
