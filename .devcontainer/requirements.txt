@@ -1,7 +1,10 @@
 numpy
+pandas
 pytest
 pyyaml
 regex
 python-ranges
 dijkstra
 advent-of-code-data
+requests
+beautifulsoup4
