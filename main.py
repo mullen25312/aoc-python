@@ -16,12 +16,14 @@ dailyPuzzles = []
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y22"], range(1, 26))]) # year 2022
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y23"], range(1, 26))]) # year 2023
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y24"], range(1, 26))]) # year 2024
-dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 5))]) # year 2025
+dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 6))]) # year 2025
 # dailyPuzzles.remove("y19.d07")
 # dailyPuzzles = ["y23.d17"]
 
 
 if __name__ == "__main__":
+
+    durations_part_one = []; durations_part_two = []
 
     # run all selected daily puzzles
     for dailyPuzzle in dailyPuzzles:
@@ -43,13 +45,15 @@ if __name__ == "__main__":
                 file.write(data)
         puzzle = importedModule.DailyPuzzle(os.path.join(dailyPuzzle.replace(".", "/"), "input.txt"))
 
+
         # solve puzzle
         puzzle.parse()
         start = timer()
         puzzle.part_one()
-        dur_part_one = (timer() - start) * 1000
+        durations_part_one.append((timer() - start) * 1000)
         puzzle.part_two()
-        dur_part_two = (timer() - (start + dur_part_one / 1000)) * 1000
+        durations_part_two.append((timer() - (start + durations_part_one[-1] / 1000)) * 1000)
 
         # print results
-        print(f"### {dailyPuzzle} ### : {puzzle.part_one_result:15d} / {puzzle.part_two_result:15d}  in {dur_part_one:8.2f} / {dur_part_two:8.2f} ms")
+        print(f"### {dailyPuzzle} ### : {puzzle.part_one_result:15d} / {puzzle.part_two_result:15d}  in {durations_part_one[-1]:8.2f} / {durations_part_two[-1]:8.2f} ms")
+    print(f"#### Total #### : {' '*37} {sum(durations_part_one):8.2f} / {sum(durations_part_two):8.2f} ms => {sum(durations_part_one) + sum(durations_part_two):8.2f} ms")
