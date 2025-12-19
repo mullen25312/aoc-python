@@ -15,12 +15,13 @@ days_to_be_tested = []
 # days_to_be_tested.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y23"], range(1, 26))]) # year 2023
 # days_to_be_tested.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y24"], range(1, 26))]) # year 2024
 days_to_be_tested.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 9))]) # year 2025
-days_to_be_tested.extend(["y25.d10", "y25.d11"])
+days_to_be_tested.extend(["y25.d10", "y25.d11", "y25.d12"])
 # days_to_be_tested.remove("y24.d09")
 # days_to_be_tested = ["y24.d01"]
 
 # scenarios = ["demo", "input"]
 scenarios = ["input"]
+last_of_each_year = ["y19.d25", "y20.d25", "y21.d25", "y22.d25", "y23.d25", "y24.d25", "y25.d12"]
 
 ids = tuple(f"{id[1]} -> {id[0]}" for id in itertools.product(days_to_be_tested, scenarios))
 
@@ -29,6 +30,7 @@ class TestConfig:
     __test__ = False
 
     def __init__(self, puzzle):
+        self.puzzle = puzzle
         self.aocd = aocd.models.Puzzle(year=2000 + int(puzzle[1:3]), day=int(puzzle[5:7]))
 
 @pytest.fixture(scope="class", params=itertools.product(days_to_be_tested, scenarios), ids=ids)
@@ -53,19 +55,22 @@ class Tests_dxx:
         try:
             self.test_config.aocd.answer_a
         except AttributeError:
-            pytest.skip("not solved yet")
+            pytest.exit("not solved yet")
 
         self.puzzle.parse()
         self.puzzle.part_one()
-        assert  self.test_config.aocd.answer_a in (str(self.puzzle.part_one_result),  '')
+        assert  self.test_config.aocd.answer_a == str(self.puzzle.part_one_result)
 
     def test_part_two(self):
+        if self.test_config.puzzle in last_of_each_year:
+            pytest.skip(f"skipping test for {self.test_config.puzzle} as part two does not exist")
+
         try:
             self.test_config.aocd.answer_b
         except AttributeError:
-            pytest.skip("not solved yet")
+            pytest.exit("not solved yet")
 
         self.puzzle.parse()
         self.puzzle.part_one() # in case results from part one are needed for part two
         self.puzzle.part_two()
-        assert self.test_config.aocd.answer_b in (str(self.puzzle.part_two_result),  '') 
+        assert self.test_config.aocd.answer_b == str(self.puzzle.part_two_result)
