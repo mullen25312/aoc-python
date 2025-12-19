@@ -59,6 +59,9 @@ if __name__ == "__main__":
         stars_regex = r'(?<=https:\/\/img\.shields\.io\/badge\/' + re.escape(str(year)) + r'%20⭐-)[0-9]+(?=-yellow)'
         txt = re.sub(stars_regex, f"{stars[year]:02}", txt)
 
+    stars_regex = r'(?<=https:\/\/img\.shields\.io\/badge\/total%20⭐-)[0-9]+(?=-yellow)'
+    txt = re.sub(stars_regex, f"{sum(stars.values()):02}", txt)
+
     # write updated content back to readme file
     f.write(txt)
     f.truncate()

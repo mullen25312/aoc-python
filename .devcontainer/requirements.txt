@@ -10,3 +10,4 @@ advent-of-code-data
 requests
 beautifulsoup4
 frozendict
+shapely
