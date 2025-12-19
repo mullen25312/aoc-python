@@ -17,7 +17,7 @@ dailyPuzzles = []
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y23"], range(1, 26))]) # year 2023
 # dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y24"], range(1, 26))]) # year 2024
 dailyPuzzles.extend([f"{year}.d{day:02d}" for year, day in itertools.product(["y25"], range(1, 9))]) # year 2025
-dailyPuzzles.extend(["y25.d10"])
+dailyPuzzles.extend(["y25.d10", "y25.d11"])
 # dailyPuzzles.remove("y19.d07")
 # dailyPuzzles = ["y23.d17"]
 
@@ -37,7 +37,7 @@ if __name__ == "__main__":
             continue
 
         # load demo data
-        # puzzle = importedModule.DailyPuzzle(os.path.join(dailyPuzzle.replace(".", "/"), "demo.txt"))
+        puzzle = importedModule.DailyPuzzle(os.path.join(dailyPuzzle.replace(".", "/"), "demo.txt"))
 
         # load or fetch input data
         if not os.path.exists(os.path.join(dailyPuzzle.replace(".", "/"), "input.txt")):
