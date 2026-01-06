@@ -1,7 +1,31 @@
 from utils.superDailyPuzzle import SuperDailyPuzzle
 
+def invalids(n, repeat=2):
+    result = []
+    
+    # for each possible sequence length (up to n//2 since we need at least 2 repetitions)
+    for seq_len in range(1, n // 2 + 1):
+        
+        # generate all possible sequences of this length (no leading zeros)       
+        for seq_val in range(10**(seq_len-1), 10**seq_len):
+                        
+            # add all valid repetitions up to n digits and at most repeat times
+            for idx in range(2, repeat+1):
+                current_str = str(seq_val) * idx
+                if len(current_str) > n: break
+                result.append(int(current_str))
 
-def sgn(num): return -1 if num < 0 else 1
+    # remove duplicates and return sorted list
+    return sorted(list(set(result)))
+
+def check(invalids, spans):
+    res = 0
+    for num in invalids:
+        for span in spans:
+            if num in range(span[0], span[1] + 1):
+                res += num
+                break
+    return res
 
 # advent of code 2025 day 2
 class DailyPuzzle(SuperDailyPuzzle):
@@ -13,25 +37,8 @@ class DailyPuzzle(SuperDailyPuzzle):
 
     def part_one(self):
         spans = self.parsed
-
-        res = 0
-        for span in spans:
-            for num in range(span[0], span[1] + 1): # for every number in given span
-                if len(str(num)) % 2 == 0: # if length is odd cannot be invalid
-                    if str(num)[:len(str(num))//2] == str(num)[len(str(num))//2:]: res += num # invalid if equal halves
-        self.part_one_result = res
+        self.part_one_result = check(invalids(10,2), spans)
 
     def part_two(self): 
         spans = self.parsed
-
-        res = 0
-        for span in spans:
-            for num in range(span[0], span[1] + 1): # for every number in given span
-                for seq in range(1, len(str(num))//2 + 1): # for every possible sequence length
-                    for offset in range(0, len(str(num))-seq, seq): # for every possible offset
-                        if str(num)[offset:offset+seq] != str(num)[offset+seq:offset+2*seq]:
-                            break
-                    else: # completed full loop without breaking, so all offsets for a single sequence length matched
-                        res += num
-                        break # no need to check larger sequence lengths
-        self.part_two_result = res
+        self.part_two_result = check(invalids(10, 10), spans)
